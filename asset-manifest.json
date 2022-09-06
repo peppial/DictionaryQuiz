@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/DictionaryQuiz/static/css/main.77117009.css",
-    "main.js": "/DictionaryQuiz/static/js/main.7f8b5c34.js",
+    "main.css": "/DictionaryQuiz/static/css/main.073c9b0a.css",
+    "main.js": "/DictionaryQuiz/static/js/main.74860ae9.js",
     "static/js/787.83904489.chunk.js": "/DictionaryQuiz/static/js/787.83904489.chunk.js",
     "static/media/logo.svg": "/DictionaryQuiz/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/DictionaryQuiz/index.html",
-    "main.77117009.css.map": "/DictionaryQuiz/static/css/main.77117009.css.map",
-    "main.7f8b5c34.js.map": "/DictionaryQuiz/static/js/main.7f8b5c34.js.map",
+    "main.073c9b0a.css.map": "/DictionaryQuiz/static/css/main.073c9b0a.css.map",
+    "main.74860ae9.js.map": "/DictionaryQuiz/static/js/main.74860ae9.js.map",
     "787.83904489.chunk.js.map": "/DictionaryQuiz/static/js/787.83904489.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77117009.css",
-    "static/js/main.7f8b5c34.js"
+    "static/css/main.073c9b0a.css",
+    "static/js/main.74860ae9.js"
   ]
 }
