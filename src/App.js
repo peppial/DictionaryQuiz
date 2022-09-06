@@ -28,19 +28,8 @@ function App() {
   };
   
     const csvFileToArray = (string) => {
-      const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
-      const csvRows = string.slice(string.indexOf("\r\n") + 1).split("\r\n");
-  
-      const array = csvRows.map(i => {
-        const values = i.split(",");
-        const obj = csvHeader.reduce((object, header, index) => {
-          object = values[index];
-          return object;
-        }, {});
-        return obj;
-      });
-
-      setArray(array);
+      const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+      setArray(csvRows);
     };
 
     

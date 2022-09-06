@@ -16,8 +16,7 @@ function Words(props) {
         setCounter(counter+1);
         const random = randomIntFromInterval((level-1)*1000,level*1000);
         const toSet = props.words[random];
-        console.log(random);
-        const values = toSet.split(";"); 
+        const values = toSet.split(","); 
         setFirst(values[0]);
         setLast(values[1]);
       };
