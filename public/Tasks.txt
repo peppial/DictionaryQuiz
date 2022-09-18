@@ -1,0 +1,126 @@
+
+Fuck your feelings
+
+You don’t build psychological resilience by feeling good all the time. You build psychological resilience by getting better at feeling bad.
+
+
+Hold, communication
+
+Среща Дани и Вили
+
+ProCare 1 for net
+Procare SMS templates old
+
+Procare VPA beneficiary
+
+SMS -  1 for net
+
+Бройките на дев среда АИ 25-100
+
+при Inactive да има забрана да се затвори тикета (edited) 
+ами ако едната от двете системи върне Inactive значи е Inactive
+трябва и двете да върнат NOT Found или едната примерно да не отговори въобще
+
+
+Vanesa 01.10
+
+Меетинг
+- Аутх0
+
+Vasko creo
+- shy
+- flutter
+
+
+Stoyan
+- 6m in apolyca kotlin
+- front end/back-end c++, flutter, flask
+- team lead
+
+Alexander (ELT) 8000
+-лоокер фен
+-не  е скриптаджия
+- costs optimisation
+2mo
+
+Martin Stefanov 4000
+- 4 projects uk
+- moved to varna
+- left
+
+
+
+Remapping ONPL=>XPON, BQ
+
+https://onedrive.live.com/view.aspx?resid=56FFD11FCBF16A54!121333&ithint=file%2cdocx&authkey=!AHq-niiXs5vUdM4
+
+Future plans
+GET /api/procare/public/index.php/subscriber/showDashboard
+GET /api/selfcare/public/index.php/subscriber/showDashboard
+
+
+[15:52] Peter Petrov
+Пепи, здравей - ще мога ли да помоля за една промяна в последния момент, ако все още не сте пакетирали Heroes app-а, да промените надписа на таймера, който показва оставащите часове. Тези часове бяха променени по време на дизайна от 25 на 12 часа, като идеята е, че в рамките на 12 часа позволяваме взимане на допълнителни устройства, а след изтичането им позволяваме единствено check-out. За да бъде по-ясно за колегите в Excitel, предлагам вместо “Time remaining to Check Out”, да изпишем нещо от сорта на “Remaining time for allowed additional check-in within the current shift". За следващия ъпдейт може да помислим как да им показваме и таймер с 25 часа, който да показва крайният срок за full check-out, защото от бизнес гледна точка двата таймера означават две различни неща. 
+
+
+
+те тези миграции постоянно ги правят, но просто тук удрят кейс, който не е помислен
+субскрайбера е на СМАРТ план, обаче партньорския служител може да му плати депозит кеш и да вдигне това инфра чендж тикет. Там му закачат онуто и затварят тикет, обаче той още си седи на СМАРТ плана. Преди да изтече и да направи плащане за файбър план, се отказва и иска да му върнат парите. Обаче дивайс колекшън тикет могат да съдават само служители на Ексайтел (това е едно от новите ограничения за да могат да се свържат първо с клиента), но те са пък забранени от създаване на тикети за субскрайбери на СМАРТ планове.
+
+
+he account is migrated and imported directly from H8, and the subscriber was renewed with the SMART plan only, Later ERP upgraded the subscriber from Old Network on 27-May-2022 with infra change ticket(8975067), But as the subscriber was with the SMART plan so it the subscriber's plan was not upgraded. Now the subscriber is deactivated and wants the refund for Security Deposit.
+
+
+Procare
+area_code, area_name from partner_additional data
+
+Stop inactive ERP subscribers from making online transaction for plan renewal
+https://scaleforce-team.atlassian.net/browse/DEVO-821
+
+
+
+Excitel един от най големите интернет провайдери в Индия, 700 000 абонати
+Ексайтел технолоджи подпомага бизнес процесите в Ексайтел - включване на нови абонати, поддръжка на услугата на абонатите - плащания, евентуални проблеми със свързването.  Разработваме и поддържаме няколко системи  - в уеб базирани са СРМ, тикет система, хр система, като  .net системите са в Azure клауда. Имаме и мобилни приложения, които се ползват от служителите на ексайтел както и от крайните потребители, чиито бекенд е разработен на .нет.
+
+
+
+   select *  FROM `excitel-test.test.subscriber_log` where subscriber_id between 75156175 and 75159275 and _metadata_timestamp in
+(select max(_metadata_timestamp) FROM `excitel-test.test.subscriber_log` where subscriber_id between 75156175 and 75159275
+group by subscriber_id)
+
+
+with temp as (
+  select subscriber_id, dates from (    
+    select subscriber_id, min(date(_metadata_timestamp)) min_date, max(date(_metadata_timestamp)) max_date
+     from `excitel-test.test.subscriber_log` where subscriber_id=75156175
+    group by subscriber_id
+  ), unnest(generate_date_array(min_date, max_date)) dates
+)
+select b.subscriber_id, dates, 
+  first_value(status ignore nulls) over win as status
+from temp a
+left join  `excitel-test.test.subscriber_log` b 
+on b.subscriber_id=a.subscriber_id and date(b._metadata_timestamp)=a.dates
+order by dates
+
+----
+
+WITH ranked AS (
+  SELECT *, ROW_NUMBER() OVER (PARTITION BY subscriber_id ORDER BY _metadata_timestamp DESC) AS rn
+  FROM `excitel-test.test.subscriber_log` where subscriber_id between 75156175 and 75159275 
+)
+SELECT * FROM ranked where rn = 1  
+-------
+
+with qry as (SELECT * ,
+  LAG(status)
+    OVER (PARTITION BY subscriber_id ORDER BY _metadata_timestamp ASC) AS preceding_status,
+    FROM `excitel-test.test.subscriber_log` where subscriber_id between 75156175 and 75159275)
+
+select CASE WHEN end_stamp is null THEN true ELSE false END AS is_current, * from (select  _metadata_timestamp as start_stamp,    
+      LEAD(_metadata_timestamp) 
+    OVER (PARTITION BY subscriber_id ORDER BY _metadata_timestamp ASC) AS end_stamp,
+    * from qry
+    where status<>preceding_status or preceding_status is null
+)
+order by subscriber_id,start_stamp
