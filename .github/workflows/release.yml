@@ -4,11 +4,9 @@ name: Release
 
 # Controls when the workflow will run
 on:
-  workflow_dispatch:
-    inputs:
-      versionName:
-        description: 'Name of version  (ie 5.5.0)'
-        required: true
+  milestone:
+    types: [created]
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,6 +19,6 @@ jobs:
       with:
         ref: 'develop'
     - name: Create release branch
-      run: git checkout -b release/${{ github.event.inputs.versionName }}
+      run: git checkout -b release/${{ github.event.inputs.milestoneName }}
     - name: Push new branch
-      run: git push origin release/${{ github.event.inputs.versionName }}
+      run: git push origin release/${{ github.event.inputs.milestoneName }}
