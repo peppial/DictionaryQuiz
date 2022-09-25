@@ -9,9 +9,6 @@ on:
       versionName:
         description: 'Name of version  (ie 5.5.0)'
         required: true
-      versionCode:
-        description: 'Version number (50500)'
-        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
