@@ -27,13 +27,16 @@ jobs:
     - name: Push new branch
       run: git push origin release/${{ github.event.inputs.name }}
       
+    - name: "Say Hello Mona it's Monday"
+      run: echo context.repo.owner
+       
     - name: Trigger Workflow
       uses: actions/github-script@v6
       with:
           script: |
             github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: 'peppial/test2',
               workflow_id: 'main.yml',
               ref: 'master',
             })
