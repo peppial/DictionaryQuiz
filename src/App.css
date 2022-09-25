@@ -1,12 +1,19 @@
-.App {
+
+.center {
   text-align: center;
 }
-
+.margined{
+  padding-left: auto;
+  padding-right: auto;
+  max-width: 800px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.nowrap{
+  white-space: nowrap;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -17,7 +24,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
   font-size: calc(10px + 2vmin);
 }
 
