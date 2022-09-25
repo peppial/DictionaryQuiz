@@ -30,7 +30,7 @@ jobs:
     - name: Trigger Workflow
       uses: actions/github-script@v6
       with:
-          github-token: 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
+          github-token: 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
           script: |
             github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
