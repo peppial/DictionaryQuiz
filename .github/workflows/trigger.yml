@@ -1,0 +1,8 @@
+name: Trigger Release 
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'Tag of the version  (ie 5.5.0)'
+        required: true
+    
