@@ -5,7 +5,7 @@ name: Release
 # Controls when the workflow will run
 on:
   milestone:
-    types: [created]
+    types: [created,opened]
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
