@@ -4,9 +4,12 @@ name: Release
 
 # Controls when the workflow will run
 on:
-  project:
-    types: [edited]
-
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Release tag (e.g. 1.5.0)'
+        required: true
+        
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
