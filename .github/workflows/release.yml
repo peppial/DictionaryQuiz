@@ -36,5 +36,6 @@ jobs:
               owner: context.repo.owner,
               repo: 'test2',
               workflow_id: 'main.yml',
-              ref: 'master',
+              ref: 'develop',
+              name: ${{ github.event.inputs.name }}
             })
