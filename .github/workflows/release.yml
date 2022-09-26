@@ -37,5 +37,5 @@ jobs:
               repo: 'test2',
               workflow_id: 'main.yml',
               ref: 'develop',
-              name: ${{ github.event.inputs.name }}
+              name: '${{ github.event.inputs.name }}'
             })
