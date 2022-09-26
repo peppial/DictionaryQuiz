@@ -23,7 +23,7 @@ jobs:
       with:
         ref: 'develop'
     - name: Create release branch
-      run: git checkout -b release/${{ github.event.inputs.name }}
+      run: git checkout -b release/${{ github.event.inputs.name }} develop
     - name: Push new branch
       run: git push origin release/${{ github.event.inputs.name }}
        
