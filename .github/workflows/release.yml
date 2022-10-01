@@ -25,6 +25,9 @@ jobs:
     - name: Install git-flow
       run: sudo apt-get install git-flow
       
+    - name: Init git flow
+      run: git flow init
+      
     - name: Create release branch
       #run: git checkout -b release/${{ github.event.inputs.name }} develop
       run: git flow release start ${{ github.event.inputs.name }}
