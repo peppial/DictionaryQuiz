@@ -1,0 +1,41 @@
+name: Start Feature
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Feature name (e.g. SCALEXC-6178)'
+        required: true
+        
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  createrelease:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Check out code develop
+      uses: actions/checkout@v2
+      with:
+        ref: 'develop'
+        
+    - name: Check out code master
+      uses: actions/checkout@v2
+      with:
+        ref: 'master'
+        
+    - name: Install git-flow
+      run: sudo apt-get install git-flow
+      
+    - name: Init git flow
+      run: git flow init -d --feature feature/  --bugfix feature/ --release release/ --hotfix hotfix/  -t ''
+      
+    - name: Create feature branch
+      run: git flow feature start ${{ github.event.inputs.name }}
+    
+    - name: Push new branch
+      run: git push origin feature/${{ github.event.inputs.name }}
+       
+    
