@@ -39,7 +39,7 @@ jobs:
       run: git flow init -d --feature feature/  --bugfix feature/ --release release/ --hotfix hotfix/  -t ''
     
     - name: Set Name
-      run: git config --global user.email "penka.alexandrova@scaleforce.io" && git config --global user.name "peppi-scaleforce"
+      run: git config --global user.email ${{secrets.WF_EMAIL}} && git config --global user.name ${{secrets.WF_USERNAME}}
        
     - name: Checkout release branch
       run: git checkout release/${{ github.event.inputs.name }}
