@@ -43,7 +43,7 @@ jobs:
     - name: Check out code release
       uses: actions/checkout@v2
       with:
-        ref: release/${{ github.event.inputs.name }}
+        ref: 'release/${{ github.event.inputs.name }}'
         
     - name: Finish release branch
       run: git flow release finish ${{ github.event.inputs.name }}
