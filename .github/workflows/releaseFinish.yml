@@ -53,7 +53,7 @@ jobs:
       run: git push origin master
       
     - name: Checkout master branch
-      run: git tag -a {{ github.event.inputs.name }}
+      run: git tag -a '{{ github.event.inputs.name }}'
       
     - name: Checkout dev branch
       run: git checkout develop
