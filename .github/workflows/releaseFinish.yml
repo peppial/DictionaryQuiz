@@ -32,7 +32,10 @@ jobs:
       with:
         ref: 'master'
         
-        
+    - name: Check out code release
+      uses: actions/checkout@v2
+      with:
+        ref: 'release/${{ github.event.inputs.name }}'
        
     - name: Install git-flow
       run: sudo apt-get install git-flow
@@ -40,10 +43,7 @@ jobs:
     - name: Init git flow
       run: git flow init -d --feature feature/  --bugfix feature/ --release release/ --hotfix hotfix/  -t ''
     
-    - name: Check out code release
-      uses: actions/checkout@v2
-      with:
-        ref: 'release/${{ github.event.inputs.name }}'
+  
         
     - name: Finish release branch
       run: git flow release finish ${{ github.event.inputs.name }}
