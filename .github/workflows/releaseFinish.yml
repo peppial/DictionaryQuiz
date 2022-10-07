@@ -25,7 +25,7 @@ jobs:
     - name: Check out code develop
       uses: actions/checkout@v2
       with:
-        ref: 'develop'
+        ref: 'release/${{ github.event.inputs.name }}'
         
     - name: Checkout master branch
       run: git fetch && git checkout master
