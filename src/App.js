@@ -1,59 +1,20 @@
-import logo from './logo.svg';
-import React, { useState, useEffect } from 'react';
-import Words from './components/words';
+import React from 'react';
 import './App.css';
-
-const file = './bg-en.csv';
-
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
+import WordsPage from './pages/wordsPage'
+import GetStartedPage from './pages/getStarted'
+import Cookies from 'js-cookie'
 
 function App() {
 
-  useEffect(() => {
-    start();
-  }, []);
-
-  const [text, setText] = useState();
-  const [array, setArray] = useState();
-  
- 
- 
-  const start = () => {
-  fetch(file)
-    .then( response => response.text() )
-    .then( responseText => {
-        setText( responseText );
-        csvFileToArray(responseText);
-    });
-
-  };
-  
-    const csvFileToArray = (string) => {
-      const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
-      const csvRows = string.slice(string.indexOf("\r\n") + 1).split("\r\n");
-  
-      const array = csvRows.map(i => {
-        const values = i.split(",");
-        const obj = csvHeader.reduce((object, header, index) => {
-          object = values[index];
-          return object;
-        }, {});
-        return obj;
-      });
-
-      setArray(array);
-    };
-
-    
-  return (
-    <div className="App">
-      <header className="App-header">
-        Quiz
-       <Words words={array}  />
-      </header>
-    </div>
-    
-
-  );
+  return (<BrowserRouter>
+			<Routes>
+				<Route path="/words" element={<WordsPage/>}/>
+        <Route path="/getstarted" element={<GetStartedPage/>}/>
+       	<Route path="*" element={<Navigate to='/words'/>}/>
+       </Routes>
+		</BrowserRouter>)
 }
+
 
 export default App; 
