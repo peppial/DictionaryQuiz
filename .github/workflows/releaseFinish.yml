@@ -39,9 +39,10 @@ jobs:
       run: git flow init -d --feature feature/  --bugfix feature/ --release release/ --hotfix hotfix/  -t ''
     
     - name: Checkout release branch
-      run: git branch -f release/${{ github.event.inputs.name }} release/${{ github.event.inputs.name }}
+      run: git pull origin release/${{ github.event.inputs.name }}
+      
     - name: Checkout release branch
-      run: git checkout origin/release/${{ github.event.inputs.name }}
+      run: git checkout release/${{ github.event.inputs.name }}
         
     - name: Finish release branch
       run: git flow release finish ${{ github.event.inputs.name }}
