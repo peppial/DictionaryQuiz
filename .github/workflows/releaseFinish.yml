@@ -29,6 +29,9 @@ jobs:
         
     - name: Checkout master branch
       run: git fetch && git checkout master
+    
+    - name: Checkout master develop
+      run: git fetch && git checkout develop
        
     - name: Install git-flow
       run: sudo apt-get install git-flow
