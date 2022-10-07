@@ -22,8 +22,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-    - name: Checkout develop branch
-      run: git fetch && git checkout develop
+    - name: Check out code develop
+      uses: actions/checkout@v2
+      with:
+        ref: 'develop'
         
     - name: Checkout master branch
       run: git fetch && git checkout master
@@ -41,8 +43,24 @@ jobs:
     - name: Checkout release branch
       run: git fetch && git checkout release/${{ github.event.inputs.name }}
             
-    - name: Finish release branch
-      run: git flow release finish ${{ github.event.inputs.name }} -m 'Merge branch' ${{ github.event.inputs.name }}
-
+    - name: Checkout master branch
+      run: git fetch && git checkout master  
+     
+    - name: Checkout master branch
+      run: git merge --no-ff release/${{ github.event.inputs.name }}
+    
+    - name: push master branch
+      run: git push origin master
       
-   
+    - name: Checkout master branch
+      run: git tag -a ${{ github.event.inputs.name }}
+      
+    - name: Checkout dev branch
+      run: git checkout develop
+      
+    - name: Checkout master branch
+      run: git merge --no-ff release/${{ github.event.inputs.name }}
+      
+    - name: push master branch
+      run: git push origin develop
+      
