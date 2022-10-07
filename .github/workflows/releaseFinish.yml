@@ -22,15 +22,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-    - name: Check out code develop
-      uses: actions/checkout@v2
-      with:
-        ref: 'develop'
+    - name: Checkout develop branch
+      run: git fetch && git checkout develop
         
-    - name: Check out code master
-      uses: actions/checkout@v2
-      with:
-        ref: 'master'
+    - name: Checkout master branch
+      run: git fetch && git checkout master
        
     - name: Install git-flow
       run: sudo apt-get install git-flow
