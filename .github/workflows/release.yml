@@ -38,15 +38,4 @@ jobs:
     - name: Push new branch
       run: git push origin release/${{ github.event.inputs.name }}
        
-    - name: Trigger Workflow
-      uses: actions/github-script@v6
-      with:
-          github-token: ${{secrets.RELEASE_TOKEN}}
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: 'test2',
-              workflow_id: 'main.yml',
-              ref: 'develop',
-              inputs:{'name':'${{ github.event.inputs.name }}'}
-            })
+    
